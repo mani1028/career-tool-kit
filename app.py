@@ -15,21 +15,17 @@ app = Flask(__name__)
 def build_generate_prompt(job_description, document_text, template_content):
     """Constructs the prompt for generating a new Resume or CV by filling a template."""
     return f"""
-You are an expert career consultant and resume writer. Your task is to rewrite the user's resume to be perfectly tailored for a specific job description, using the provided template as a structural guide. The final output must be a concise, professional, single-page document.
+You are an expert career consultant and resume writer. Your absolute highest priority is to rewrite the user's resume to be a concise, professional, single-page document perfectly tailored for a specific job description.
 
-**Instructions:**
-1.  **Analyze the User's Document:** Carefully read the `CURRENT DOCUMENT TEXT` to extract all relevant information: name, contact details (city, state, phone, email, links), summary, experience, projects, education, skills, etc.
-2.  **Analyze the Job Description:** Understand the key requirements and keywords from the `JOB DESCRIPTION`.
-3.  **Fill the Template Intelligently:** Populate the `RESUME TEMPLATE` below with the extracted information.
-    -   Replace all placeholders like `[Your Name]`, `[City, State]`, etc., with the actual information from the user's document.
-    -   **Tailor the Content:** Do not just copy and paste. Rewrite the summary, experience, and project descriptions to highlight the skills and achievements that are most relevant to the `JOB DESCRIPTION`. Use strong action verbs and quantify results where possible.
-    -   **CRITICAL EDUCATION FORMATTING:** You MUST extract and list ALL educational entries. For each entry, the degree/qualification and the institution name MUST be on the SAME LINE, separated by a comma, and in NORMAL (non-bold) text. Do NOT add a line break between them.
-        -   **BAD:** `### **Bachelor of Computer Science**\\n, Vaagdevi Engineering College`
-        -   **GOOD:** `### Bachelor of Computer Science, Vaagdevi Engineering College *2021-2025*`
-    -   **Contact Info Formatting:** Ensure the contact information is split into two separate paragraphs (with a blank line between them in Markdown) to ensure they render on separate, centered lines.
-    -   **Omissions:** If the user's document doesn't contain information for a specific section (e.g., "Extra-Curricular Activities"), omit that entire section from the final output.
-4.  **CRITICAL SINGLE-PAGE CONSTRAINT:** The final resume MUST fit onto a single A4 page. You must be concise and adjust spacing and summarization to meet this requirement. Do not let it overflow to a second page.
-5.  **Final Output:** Provide ONLY the completed, tailored resume in clean Markdown format. Do not add any extra text, comments, or apologies.
+**CRITICAL, NON-NEGOTIABLE INSTRUCTIONS:**
+1.  **SINGLE-PAGE CONSTRAINT:** The final resume MUST fit onto a single A4 page. This is the most important rule. To achieve this, you MUST aggressively summarize experience and project descriptions. Be ruthless in cutting down text to ensure everything fits. If the user's text is too long, shorten it. Do not let the content overflow.
+2.  **Analyze User's Document:** Carefully read the `CURRENT DOCUMENT TEXT` to extract all relevant information: name, contact details, summary, experience, projects, education, skills, etc.
+3.  **Tailor Content:** Rewrite the summary, experience, and project descriptions to highlight the skills and achievements most relevant to the `JOB DESCRIPTION`. Use strong action verbs and quantify results where possible.
+4.  **CRITICAL EDUCATION FORMATTING:** You MUST extract and list ALL educational entries. For each entry, the degree/qualification and the institution name MUST be on the SAME LINE, separated by a comma. Do NOT add a line break between them.
+    -   **CORRECT EXAMPLE:** `### Bachelor of Computer Science, Vaagdevi Engineering College *2021-2025*`
+5.  **Contact Info Formatting:** Ensure the contact info is split into two separate, centered paragraphs (with a blank line between them in Markdown).
+6.  **Omissions:** If the user's document lacks information for a section (e.g., "Extra-Curricular Activities"), omit that section.
+7.  **Final Output:** Provide ONLY the completed, tailored resume in clean Markdown. Do not add any extra text or comments.
 
 ---
 **JOB DESCRIPTION:**
