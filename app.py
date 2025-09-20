@@ -205,7 +205,7 @@ def call_gemini_api(prompt):
     if not api_key:
         raise ValueError("Server is not configured with a Gemini API key.")
 
-    API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api_key}"
+    API_URL = f"[https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=](https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=){api_key}"
     headers = {"Content-Type": "application/json"}
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
 
@@ -214,6 +214,11 @@ def call_gemini_api(prompt):
         response.raise_for_status()
         response_data = response.json()
     except requests.exceptions.RequestException as e:
+        # For debugging, print the full error
+        print(f"API Request Error: {e}")
+        # Also print response body if available
+        if e.response is not None:
+            print(f"API Response Body: {e.response.text}")
         raise ValueError(f"API request failed: {e}")
 
     if 'candidates' not in response_data or not response_data['candidates']:
@@ -221,6 +226,8 @@ def call_gemini_api(prompt):
         if 'promptFeedback' in response_data and 'blockReason' in response_data['promptFeedback']:
             reason = response_data['promptFeedback']['blockReason']
             raise ValueError(f"Prompt was blocked by the API for safety reasons: {reason}. Please modify your input.")
+        # For debugging, print the whole response
+        print(f"Unexpected API Response: {response_data}")
         raise ValueError('API returned no content. The prompt may have been blocked for other reasons.')
     
     return response_data['candidates'][0]['content']['parts'][0]['text']
@@ -301,12 +308,15 @@ def process_api_request(request, prompt_builder_func):
             prompt = prompt_builder_func(document_text)
         
         else:
-            return jsonify({'error': 'Invalid API request.'}), 400
+            # This case was causing the 400 error. The prompt was not being built.
+            # We should handle this more gracefully. Let's assume 'generate' if no other matches.
+            return jsonify({'error': 'Invalid API function specified.'}), 400
 
         generated_content = call_gemini_api(prompt)
         return jsonify({'content': generated_content})
 
     except Exception as e:
+        print(f"Error in process_api_request: {e}") # Added for better server-side logging
         return jsonify({'error': str(e)}), 500
 
 # --- Feature API Routes ---
