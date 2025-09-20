@@ -19,7 +19,9 @@ body {
     width: 210mm;
     max-width: 100%;
     margin-bottom: 1.5rem;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
     padding: 0 1rem;
     box-sizing: border-box;
 }
@@ -34,10 +36,18 @@ body {
     font-weight: 600;
     font-size: 0.9rem;
     transition: all 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .toolbar button:hover {
     background: #111;
+}
+
+.toolbar button:disabled {
+    background: #555;
+    cursor: not-allowed;
 }
 
 .resume-sheet {
@@ -48,8 +58,8 @@ body {
     padding: 0.4in;
     box-sizing: border-box;
     box-shadow: 0 4px 25px rgba(0,0,0,0.15);
-    color: #1f2937;
-    line-height: 1.4;
+    color: #1f2j, 
+    line-height: 1.3; /* Tighter line height for the whole document */
     font-size: 10.5pt;
 }
 
@@ -71,13 +81,14 @@ body {
     text-align: center;
     font-size: 10pt;
     color: #333;
-    margin: 0 auto 0.2rem auto; /* Adjusted for better spacing */
-    line-height: 1.5;
+    margin: 0 auto 0.1rem auto; /* Reduced space between contact lines */
+    line-height: 1.4;
 }
 /* The second line of contact info */
 .resume-sheet h1 + p + p {
+    text-align: center;
     margin-top: 0;
-    margin-bottom: 1.5rem; /* Increased space after contact info */
+    margin-bottom: 1.2rem; /* Reduced space after contact info */
 }
 
 
@@ -88,34 +99,34 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     border-bottom: 1px solid #333;
-    padding-bottom: 0.2rem;
-    margin-top: 1rem;
-    margin-bottom: 0.6rem;
+    padding-bottom: 0.15rem;
+    margin-top: 0.7rem; /* Reduced space above section titles */
+    margin-bottom: 0.2rem; /* Reduced space below section titles */
 }
 
 /* Job Titles, Project Names, etc. */
 .resume-sheet h3 {
     font-size: 11pt;
-    font-weight: normal; /* Titles are normal weight by default */
-    margin-top: 0.8rem;
-    margin-bottom: 0.3rem;
-    position: relative;
-    padding-right: 120px;
+    font-weight: normal; 
+    margin-top: 0.4rem; /* Reduced space above each entry */
+    margin-bottom: 0.1rem; /* Tighter space below the title */
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }
-/* This makes the titles for Experience/Projects bold */
+
 .resume-sheet h3 strong {
     font-weight: 700;
 }
 
-/* Styles the date part (in italics) */
+/* Styles the date part */
 .resume-sheet h3 em {
     font-weight: normal;
     font-style: normal;
     color: #333;
     font-size: 10.5pt;
-    position: absolute;
-    right: 0;
-    top: 0;
+    flex-shrink: 0;
+    padding-left: 1rem;
 }
 
 /* Bullet points for descriptions */
@@ -126,7 +137,7 @@ body {
 }
 
 .resume-sheet li {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem; /* Reduced space between bullet points */
     padding-left: 1rem;
     position: relative;
 }
@@ -141,7 +152,7 @@ body {
 
 /* General paragraphs, like in summary */
 .resume-sheet > p {
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.3rem 0; /* Reduced space for paragraphs */
 }
 
 /* Skills section formatting */
@@ -151,7 +162,7 @@ body {
 }
 .resume-sheet h2 + ul li {
     padding-left: 0;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.3rem; /* Tighter skills list */
 }
 .resume-sheet h2 + ul li::before {
     content: '';
@@ -179,7 +190,7 @@ body {
 @media print {
     @page {
         size: A4;
-        margin: 0.4in;
+        margin: 0; /* Remove browser default margins */
     }
 
     body {
@@ -197,11 +208,12 @@ body {
     .resume-sheet {
         box-shadow: none;
         margin: 0;
-        padding: 0;
+        padding: 0.4in; /* Add padding to the sheet itself to compensate for page margin removal */
         width: 100%;
         min-height: 0;
         border: none;
         font-size: 10.5pt;
+        box-sizing: border-box;
     }
 
     .resume-sheet h1, .resume-sheet h2, .resume-sheet h3, .resume-sheet strong, .resume-sheet p, .resume-sheet li {

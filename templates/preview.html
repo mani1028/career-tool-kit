@@ -7,10 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/preview.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="toolbar">
-        <button onclick="window.print()">Print / Save as PDF</button>
+        <button id="print-btn"><i data-lucide="printer"></i> Print</button>
+        <button id="download-pdf-btn"><i data-lucide="download"></i> Download PDF</button>
     </div>
     <div id="resume-container" class="resume-sheet">
         <!-- Rendered Markdown will be injected here by JavaScript -->
@@ -18,17 +21,45 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
             const resumeContent = sessionStorage.getItem('resumePreviewContent');
+            const resumeContainer = document.getElementById('resume-container');
+
             if (resumeContent) {
                 // Sanitize the content before parsing
                 const sanitizedContent = resumeContent.replace(/<script.*?>.*?<\/script>/gi, '');
                 const htmlContent = marked.parse(sanitizedContent);
-                document.getElementById('resume-container').innerHTML = htmlContent;
+                resumeContainer.innerHTML = htmlContent;
             } else {
-                document.getElementById('resume-container').innerHTML = '<p>No content to display. Please generate a document first.</p>';
+                resumeContainer.innerHTML = '<p>No content to display. Please generate a document first.</p>';
             }
+
+            const printBtn = document.getElementById('print-btn');
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+
+            const downloadBtn = document.getElementById('download-pdf-btn');
+            downloadBtn.addEventListener('click', () => {
+                const element = document.getElementById('resume-container');
+                const opt = {
+                  margin:       0.4,
+                  filename:     'resume.pdf',
+                  image:        { type: 'jpeg', quality: 0.98 },
+                  html2canvas:  { scale: 2 },
+                  jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+                };
+                downloadBtn.disabled = true;
+                downloadBtn.innerHTML = '<i data-lucide="loader-2" class="animate-spin"></i> Downloading...';
+                lucide.createIcons();
+
+                html2pdf().set(opt).from(element).save().then(() => {
+                    downloadBtn.disabled = false;
+                    downloadBtn.innerHTML = '<i data-lucide="download"></i> Download PDF';
+                    lucide.createIcons();
+                });
+            });
         });
     </script>
 </body>
 </html>
-

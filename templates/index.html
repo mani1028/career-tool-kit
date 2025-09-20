@@ -9,45 +9,83 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- 
+    AdSense Script 
+    NOTE: Replace ca-pub-YOUR_ADSENSE_CLIENT_ID with your actual AdSense Publisher ID.
+  -->
+  <!--
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_CLIENT_ID"
+     crossorigin="anonymous"></script>
+  -->
 </head>
 
-<body class="bg-slate-50 text-slate-700 font-inter min-h-screen">
+<body class="bg-slate-100 text-slate-800 font-inter min-h-screen">
+  <div class="relative z-10">
 
-  <!-- 🌟 Header -->
-  <header class="text-center py-12 md:py-16">
-    <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-cyan-400">AI Career Toolkit Pro</h1>
-    <p class="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">Your intelligent partner for navigating the job market and landing your dream role.</p>
-  </header>
+    <!-- 🌟 Header -->
+    <header class="text-center py-12 md:py-16">
+      <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600">AI Career Toolkit Pro</h1>
+      <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Your intelligent partner for navigating the job market and landing your dream role.</p>
+    </header>
 
-  <div class="container mx-auto px-4 md:px-10">
+    <div class="container mx-auto px-4 md:px-10">
 
-    <!-- 🧭 Tab Navigation -->
-    <div class="mb-10">
-      <div class="flex border-b border-slate-200 overflow-x-auto">
-        <button data-tab="generate" class="tab-btn active"><i data-lucide="file-pen-line"></i> Generate</button>
-        <button data-tab="templates" class="tab-btn"><i data-lucide="layout-template"></i> Templates</button>
-        <button data-tab="score" class="tab-btn"><i data-lucide="gauge-circle"></i> Score</button>
-        <button data-tab="cover-letter" class="tab-btn"><i data-lucide="mail"></i> Cover Letter</button>
-        <button data-tab="interview-prep" class="tab-btn"><i data-lucide="message-square-quote"></i> Interview</button>
-        <button data-tab="linkedin" class="tab-btn"><i data-lucide="linkedin"></i> LinkedIn</button>
-        <button data-tab="tracker" class="tab-btn"><i data-lucide="briefcase"></i> Tracker</button>
+      <!-- 🧭 Tab Navigation -->
+      <div class="mb-10 flex justify-center">
+        <div class="border-b border-slate-200 overflow-x-auto">
+          <button data-tab="generate" class="tab-btn active"><i data-lucide="file-pen-line"></i> Generate</button>
+          <button data-tab="templates" class="tab-btn"><i data-lucide="layout-template"></i> Templates</button>
+          <button data-tab="score" class="tab-btn"><i data-lucide="gauge-circle"></i> Score</button>
+          <button data-tab="cover-letter" class="tab-btn"><i data-lucide="mail"></i> Cover Letter</button>
+          <button data-tab="interview-prep" class="tab-btn"><i data-lucide="message-square-quote"></i> Interview</button>
+          <button data-tab="linkedin" class="tab-btn"><i data-lucide="linkedin"></i> LinkedIn</button>
+          <button data-tab="portfolio" class="tab-btn"><i data-lucide="layout-dashboard"></i> Portfolio</button>
+        </div>
       </div>
+
+      <!-- Ad Slot: Top Banner -->
+      <!-- 
+      <div class="ad-container my-8">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-YOUR_ADSENSE_CLIENT_ID"
+            data-ad-slot="YOUR_AD_SLOT_ID"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+      </div>
+      -->
+
+      <!-- 📍 Main Content -->
+      <main id="main-content" class="space-y-6"></main>
     </div>
 
-    <!-- 📍 Main Content -->
-    <main id="main-content" class="space-y-6"></main>
+    <footer class="text-center py-8 mt-16">
+      <p class="text-slate-500">&copy; 2024 AI Career Toolkit Pro. All rights reserved.</p>
+      <a href="/privacy-policy" class="text-violet-600 hover:underline">Privacy Policy</a>
+      
+      <!-- Ad Slot: Footer Banner -->
+      <!--
+      <div class="ad-container mt-8">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-YOUR_ADSENSE_CLIENT_ID"
+            data-ad-slot="YOUR_AD_SLOT_ID"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+      </div>
+      -->
+    </footer>
   </div>
 
-  <!-- 🪟 Modal for Job Tracker -->
-  <div id="modal-backdrop" class="hidden fixed inset-0 bg-black bg-opacity-60 z-40"></div>
-  <div id="job-tracker-modal" class="hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl z-50 w-full max-w-lg p-6"></div>
-
-  <footer class="text-center py-8 mt-16">
-    <p class="text-slate-500">&copy; 2024 AI Career Toolkit Pro. All rights reserved.</p>
-  </footer>
-
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-  <script>lucide.createIcons();</script>
+  <script>
+    // Initialize icons after the DOM is ready and the script is loaded.
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  </script>
 </body>
 </html>
 
