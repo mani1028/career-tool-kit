@@ -205,7 +205,7 @@ def call_gemini_api(prompt):
     if not api_key:
         raise ValueError("Server is not configured with a Gemini API key.")
 
-    API_URL = f"[https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=](https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=){api_key}"
+    API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api_key}"
     headers = {"Content-Type": "application/json"}
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
 
@@ -359,4 +359,5 @@ def get_templates():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
