@@ -72,4 +72,5 @@ Once the setup is complete, run the Flask application from your terminal:
 
 python app.py
 
+
 The application will start and be available at http://127.0.0.1:5000 in your web browser.
