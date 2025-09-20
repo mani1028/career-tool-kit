@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/preview.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="toolbar">
+        <button onclick="window.print()">Print / Save as PDF</button>
+    </div>
+    <div id="resume-container" class="resume-sheet">
+        <!-- Rendered Markdown will be injected here by JavaScript -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const resumeContent = sessionStorage.getItem('resumePreviewContent');
+            if (resumeContent) {
+                // Sanitize the content before parsing
+                const sanitizedContent = resumeContent.replace(/<script.*?>.*?<\/script>/gi, '');
+                const htmlContent = marked.parse(sanitizedContent);
+                document.getElementById('resume-container').innerHTML = htmlContent;
+            } else {
+                document.getElementById('resume-container').innerHTML = '<p>No content to display. Please generate a document first.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
+

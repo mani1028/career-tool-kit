@@ -1,0 +1,220 @@
+/*
+  This CSS is designed to render the Markdown output from the AI prompt
+  into a format that closely resembles the user's PDF example.
+*/
+
+body {
+    background-color: #e5e7eb; /* Light gray background */
+    font-family: 'Times New Roman', Times, serif; /* Classic serif font */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 2rem 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.toolbar {
+    width: 210mm;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+    text-align: right;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.toolbar button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.25rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.toolbar button:hover {
+    background: #111;
+}
+
+.resume-sheet {
+    background-color: white;
+    width: 210mm;
+    min-height: 297mm;
+    max-width: 100%;
+    padding: 0.4in;
+    box-sizing: border-box;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+    color: #1f2937;
+    line-height: 1.4;
+    font-size: 10.5pt;
+}
+
+/* --- Typography & Layout --- */
+
+.resume-sheet h1 {
+    font-size: 22pt;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 0.25rem 0;
+    border: none;
+    padding: 0;
+}
+
+/* Contact Info Block */
+.resume-sheet h1 + p {
+    text-align: center;
+    font-size: 10pt;
+    color: #333;
+    margin: 0 auto 0.2rem auto; /* Adjusted for better spacing */
+    line-height: 1.5;
+}
+/* The second line of contact info */
+.resume-sheet h1 + p + p {
+    margin-top: 0;
+    margin-bottom: 1.5rem; /* Increased space after contact info */
+}
+
+
+.resume-sheet h2 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+/* Job Titles, Project Names, etc. */
+.resume-sheet h3 {
+    font-size: 11pt;
+    font-weight: normal; /* Titles are normal weight by default */
+    margin-top: 0.8rem;
+    margin-bottom: 0.3rem;
+    position: relative;
+    padding-right: 120px;
+}
+/* This makes the titles for Experience/Projects bold */
+.resume-sheet h3 strong {
+    font-weight: 700;
+}
+
+/* Styles the date part (in italics) */
+.resume-sheet h3 em {
+    font-weight: normal;
+    font-style: normal;
+    color: #333;
+    font-size: 10.5pt;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* Bullet points for descriptions */
+.resume-sheet ul {
+    list-style-type: none;
+    padding-left: 0.25rem;
+    margin: 0 0 0 0.5rem;
+}
+
+.resume-sheet li {
+    margin-bottom: 0.3rem;
+    padding-left: 1rem;
+    position: relative;
+}
+/* Custom bullet point */
+.resume-sheet li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+}
+
+/* General paragraphs, like in summary */
+.resume-sheet > p {
+    margin: 0 0 0.5rem 0;
+}
+
+/* Skills section formatting */
+.resume-sheet h2 + ul {
+    padding-left: 0;
+    margin-left: 0;
+}
+.resume-sheet h2 + ul li {
+    padding-left: 0;
+    margin-bottom: 0.4rem;
+}
+.resume-sheet h2 + ul li::before {
+    content: '';
+}
+
+
+/* General bold text for skill categories */
+.resume-sheet strong {
+    font-weight: 700;
+    padding-right: 8px;
+}
+
+/* --- Clickable Links --- */
+.resume-sheet a {
+    color: #0d47a1; /* A professional, dark blue */
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.resume-sheet a:hover {
+    text-decoration: underline;
+}
+
+/* --- Print-Specific Styles --- */
+@media print {
+    @page {
+        size: A4;
+        margin: 0.4in;
+    }
+
+    body {
+        background-color: white;
+        padding: 0;
+        margin: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .toolbar {
+        display: none;
+    }
+
+    .resume-sheet {
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 0;
+        border: none;
+        font-size: 10.5pt;
+    }
+
+    .resume-sheet h1, .resume-sheet h2, .resume-sheet h3, .resume-sheet strong, .resume-sheet p, .resume-sheet li {
+        color: black !important;
+    }
+
+    .resume-sheet a {
+        color: black !important;
+        text-decoration: none !important;
+    }
+
+    .resume-sheet h2 {
+        border-bottom-color: #333 !important;
+    }
+}
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Career Toolkit Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="bg-slate-50 text-slate-700 font-inter min-h-screen">
+
+  <!-- 🌟 Header -->
+  <header class="text-center py-12 md:py-16">
+    <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-cyan-400">AI Career Toolkit Pro</h1>
+    <p class="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">Your intelligent partner for navigating the job market and landing your dream role.</p>
+  </header>
+
+  <div class="container mx-auto px-4 md:px-10">
+
+    <!-- 🧭 Tab Navigation -->
+    <div class="mb-10">
+      <div class="flex border-b border-slate-200 overflow-x-auto">
+        <button data-tab="generate" class="tab-btn active"><i data-lucide="file-pen-line"></i> Generate</button>
+        <button data-tab="templates" class="tab-btn"><i data-lucide="layout-template"></i> Templates</button>
+        <button data-tab="score" class="tab-btn"><i data-lucide="gauge-circle"></i> Score</button>
+        <button data-tab="cover-letter" class="tab-btn"><i data-lucide="mail"></i> Cover Letter</button>
+        <button data-tab="interview-prep" class="tab-btn"><i data-lucide="message-square-quote"></i> Interview</button>
+        <button data-tab="linkedin" class="tab-btn"><i data-lucide="linkedin"></i> LinkedIn</button>
+        <button data-tab="tracker" class="tab-btn"><i data-lucide="briefcase"></i> Tracker</button>
+      </div>
+    </div>
+
+    <!-- 📍 Main Content -->
+    <main id="main-content" class="space-y-6"></main>
+  </div>
+
+  <!-- 🪟 Modal for Job Tracker -->
+  <div id="modal-backdrop" class="hidden fixed inset-0 bg-black bg-opacity-60 z-40"></div>
+  <div id="job-tracker-modal" class="hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl z-50 w-full max-w-lg p-6"></div>
+
+  <footer class="text-center py-8 mt-16">
+    <p class="text-slate-500">&copy; 2024 AI Career Toolkit Pro. All rights reserved.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
+
